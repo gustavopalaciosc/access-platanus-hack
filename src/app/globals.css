@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #000000;
+  --background: #111827;
   --foreground: #e9e9e9;
   --font-oxanium: "__Oxanium_65a94c", "__Oxanium_Fallback_65a94c", sans-serif;
 }
