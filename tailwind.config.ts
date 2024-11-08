@@ -12,6 +12,12 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        oxanium: ['Oxanium', 'sans-serif']
+      },
+      screens: {
+        'xl': '700px'
+      }
     },
   },
   plugins: [],
