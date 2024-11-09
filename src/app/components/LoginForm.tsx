@@ -2,7 +2,7 @@ import Button from "./Button";
 
 export default function LoginForm() {
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-900">
+        <div className="flex flex-col justify-center items-center min-h-screen bg-gray-900">
             <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-sm md:max-w-md lg:max-w-lg m-5">
                 <form className="flex flex-col" action="">
                     <label htmlFor="username" className="mb-2 text-gray-300">Nombre de usuario</label>
@@ -22,6 +22,7 @@ export default function LoginForm() {
                     </div>
                 </form>
             </div>
+            <a href="/">Volver</a>
         </div>
     );
 }
