@@ -31,7 +31,7 @@ export default function ScanPage() {
             const newScanner = new Html5QrcodeScanner("qr-reader", qrconfig, false);
 
             newScanner.render(
-                (result) => {
+                async (result) => {
                     console.log("QR Code detected:", result);
                     setScanResult(result || "No data"); // Guardar el resultado
                     newScanner.clear(); // Detener el escáner
@@ -46,7 +46,8 @@ export default function ScanPage() {
                     if (matchedParticipant) {
                         setMessage(`Welcome, ${matchedParticipant.name} ${matchedParticipant.last_name}!`);
                         // Aca se tiene que hacer la logica
-
+                        updateIsVerified(matchedParticipant.id);
+                        
 
                     } else {
                         setMessage("Invalid QR code. Please try again.");
@@ -63,19 +64,26 @@ export default function ScanPage() {
     };
 
     const fetchParticipants = async () => {
-        
         const { data, error } = await supabase
             .from('Participants')
             .select('*');
-        
         if (error) {
             console.error('Error fetching participants:', error);
         } else {
-            console.log(data);
-            
             setParticipants(data as Participant[]);
-            
+        }
+    };
 
+    const updateIsVerified = async (id: number) => {
+        const { data, error } = await supabase
+            .from('Participants')
+            .update({ is_verified: true })  // Cambia is_verified a true
+            .eq('id', id);  // Filtra por el id del participante
+    
+        if (error) {
+            console.error('Error updating is_verified:', error);
+        } else {
+            console.log('Participant verified:', data);
         }
     };
 
@@ -118,7 +126,7 @@ export default function ScanPage() {
 
 
     return (
-        <div className="flex justify-center items-center min-h-screen">
+        <div className="flex flex-col justify-center items-center min-h-screen">
             <div className="w-[400px] h-[500px] p-4 bg-[#6d6d6d] rounded-lg shadow-lg">
                 <h1 className="text-center text-xl font-semibold mb-4">Scan QR Code</h1>
 
@@ -143,6 +151,7 @@ export default function ScanPage() {
                     </div>
                 )}
             </div>
+            <a href="/home">Volver</a>
         </div>
     );
 }
