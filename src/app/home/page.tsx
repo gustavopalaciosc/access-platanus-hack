@@ -21,19 +21,19 @@ export default function HomePage() {
         <div className="flex flex-col ">
             <a 
                 href="/scan" 
-                className="m-[10px] text-lg font-semibold text-black  bg-[#fde047] hover:bg-[#fef08a] px-6 py-3 rounded-lg w-full text-center transition-colors duration-300 ease-in-out"
+                className="m-[10px] text-lg font-semibold text-white bg-yellow-500 hover:bg-yellow-700 px-6 py-3 rounded-lg w-full text-center transition-colors duration-300 ease-in-out"
             >
                 QR Scanner
             </a>
             <a 
                 href="/scan" 
-                className="m-[10px] text-lg font-semibold text-black  bg-[#fde047] hover:bg-[#fef08a] px-6 py-3 rounded-lg w-full text-center transition-colors duration-300 ease-in-out"
+                className="m-[10px] text-lg font-semibold text-white bg-yellow-500 hover:bg-yellow-700 px-6 py-3 rounded-lg w-full text-center transition-colors duration-300 ease-in-out"
             >
                 Validación Manual
             </a>
             <a 
                 href="/participants" 
-                className="m-[10px] text-lg font-semibold text-black  bg-[#fde047] hover:bg-[#fef08a] px-6 py-3 rounded-lg w-full text-center transition-colors duration-300 ease-in-out"
+                className="m-[10px] text-lg font-semibold text-white bg-yellow-500 hover:bg-yellow-700 px-6 py-3 rounded-lg w-full text-center transition-colors duration-300 ease-in-out"
             >
                 Participantes Validados
             </a>
