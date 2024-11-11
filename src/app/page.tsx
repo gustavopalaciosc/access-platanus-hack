@@ -1,16 +1,12 @@
 'use client';
-import Image from "next/image";
 import Button from "./components/Button";
-import { useEffect, useState } from "react";
-import { supabase } from '../lib/supabaseClient';
 import { useRouter } from 'next/navigation';
 
 function Home() {
-  const [loading, setLoading] = useState<boolean>(true); // Estado para mostrar el loading
   const router = useRouter();
   
   const handleClick = () => {
-    router.push('/login'); // Redirige a la página de login
+    router.push('/login'); 
   };
 
 

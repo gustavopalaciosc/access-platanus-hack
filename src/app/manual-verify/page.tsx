@@ -3,11 +3,7 @@ import UserVerifyForm from "../components/UserVerifyForm";
 import Navbar from "../components/Navbar";
 
 
-
 export default function ManualVerifyPage() {
-
-
-
     return (
         <>
         <Navbar />

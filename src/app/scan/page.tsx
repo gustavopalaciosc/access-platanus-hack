@@ -1,5 +1,5 @@
 "use client";
-import { Html5QrcodeScanner, Html5Qrcode } from "html5-qrcode";
+import { Html5QrcodeScanner } from "html5-qrcode";
 import { useState, useEffect, useRef } from "react";
 import { supabase } from '../../lib/supabaseClient';
 import Navbar from "../components/Navbar";
@@ -18,7 +18,7 @@ export default function ScanPage() {
     const [scanResult, setScanResult] = useState<string | null>(null);
     const [scanner, setScanner] = useState<Html5QrcodeScanner | null>(null);
     const [participants, setParticipants] = useState<Participant[]>([]);
-    const [message, setMessage] = useState<string | null>(null); // Nuevo estado para el mensaje
+    const [message, setMessage] = useState<string | null>(null); 
     const qrconfig = {qrbox: {
         width: 250,
         height: 250,
@@ -34,33 +34,29 @@ export default function ScanPage() {
             newScanner.render(
                 async (result) => {
                     console.log("QR Code detected:", result);
-                    setScanResult(result || "No data"); // Guardar el resultado
-                    newScanner.clear(); // Detener el escáner
+                    setScanResult(result || "No data"); 
+                    newScanner.clear(); 
 
                     console.log(participants);
 
-                    // Comprobar si el resultado coincide con algún validation_code
                     const matchedParticipant = participants.find(
                         (participant) => participant.validation_code == result
                     );
 
                     if (matchedParticipant) {
                         setMessage(`Participante ${matchedParticipant.name} ${matchedParticipant.last_name} verificado!`);
-                        // Aca se tiene que hacer la logica
                         updateIsVerified(matchedParticipant.id);
-                        
-
+                    
                     } else {
                         setMessage("Invalid QR code. Please try again.");
                     }
                 },
                 (error) => {
-                    // Manejo de errores
-                
+                    
                 }
             );
 
-            setScanner(newScanner); // Guardar la instancia del escáner
+            setScanner(newScanner); 
         }
     };
 
@@ -92,7 +88,6 @@ export default function ScanPage() {
         fetchParticipants();
     }, []);
 
-    // Iniciar el escáner solo si los participantes están cargados
     useEffect(() => {
         if (participants.length > 0) {
             startScanner();
@@ -100,12 +95,10 @@ export default function ScanPage() {
     }, [participants]);
 
 
-    // Función para reiniciar el escáner
     const restartScanner = () => {
         window.location.reload();
     };
 
-    // Componente para mostrar el resultado del escaneo
     const renderScanResult = () => {
         return scanResult ? (
             <div className="mt-4 p-4 bg-[#cccc] rounded-lg">
@@ -124,8 +117,6 @@ export default function ScanPage() {
     };
 
 
-
-
     return (
         <>
         <Navbar />
@@ -133,7 +124,6 @@ export default function ScanPage() {
             <div className="w-[300px] h-[400px] m-[10px] p-4 bg-[#a8a8a8] rounded-lg shadow-lg">
                 <h1 className="text-center text-xl font-semibold mb-4 text-[#4b4b4b]">QR Participante</h1>
 
-                {/* Mostrar el lector de QR solo si no hay un resultado */}
                 {!scanResult && (
                     <div
                         id="qr-reader"
@@ -142,10 +132,8 @@ export default function ScanPage() {
                     ></div>
                 )}
 
-                {/* Mostrar el resultado si existe */}
                 {renderScanResult()}
 
-                {/* Mostrar mensaje de éxito o error */}
                 {message && (
                     <div className="mt-4 p-4 text-center">
                         <p className={`text-lg font-semibold ${message.includes('Invalid') ? 'text-red-600' : 'text-[#FFFF]'}`}>
