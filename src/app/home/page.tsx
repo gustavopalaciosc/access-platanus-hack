@@ -4,6 +4,7 @@ import Button from '../components/Button';
 import { useRouter } from 'next/navigation';
 
 
+
 export default function HomePage() {
     const router = useRouter();
 
@@ -11,6 +12,7 @@ export default function HomePage() {
         // Eliminar la cookie supabase-auth-token
         document.cookie = "supabase-auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
         router.push('/login');  
+        window.location.reload();
     };
 
 
