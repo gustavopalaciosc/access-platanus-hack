@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { Participant } from "../interfaces/Participant";
 import Button from "./Button";
-import Link from "next/link";
 
 export default function UserVerifyForm() {
     const [participants, setParticipants] = useState<Participant[]>([]);
@@ -23,6 +22,7 @@ export default function UserVerifyForm() {
             console.log(error);
         } else {
             setParticipants(data || []);
+            setFilteredParticipants(data || []);
         }
     };
 
@@ -38,7 +38,7 @@ export default function UserVerifyForm() {
 
     const selectParticipant = (participant: Participant) => {
         setSelectedParticipant(participant);
-        setStatusMessage(null); // Reset status message when selecting a new participant
+        setStatusMessage(null); 
     };
 
     const validateUser = async (id: any) => {
@@ -56,7 +56,8 @@ export default function UserVerifyForm() {
             } else {
                 console.log('Participant verified:', data);
                 setStatusMessage("Validado con éxito");
-                // Optionally, update the participants list after successful validation
+                // Clear the selected participant after successful validation
+                setSelectedParticipant(null); // This will remove the participant details
                 fetchAllParticipants();
             }
         } catch (error) {
@@ -65,16 +66,15 @@ export default function UserVerifyForm() {
         } finally {
             setIsLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
         fetchAllParticipants();
     }, []);
 
     return (
-        <div className="flex flex-col justify-center items-center mt-[50px]">
-            <h1 className="text-xl font-semibold text-center mb-6">Validación Manual de Participantes</h1>
-            <div className="h-[350px] max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+        <div className="flex flex-col justify-center items-center mt-[10px]">
+            <div className="h-[350px] mt-8 p-6 bg-white rounded-lg shadow-md">
                 <form className="flex flex-col space-y-4">
                     <label htmlFor="name" className="text-gray-700 font-semibold">Ingrese Nombre o Apellido</label>
                     <input
@@ -105,7 +105,7 @@ export default function UserVerifyForm() {
                 )}
             </div>
 
-            {selectedParticipant && (
+            {selectedParticipant && statusMessage !== "Validado con éxito" && (
                 <div className="flex flex-col items-center">
                     <div className="max-w-[300px] h-[180px] mx-auto mt-8 mb-2 p-6 bg-white rounded-lg overflow-auto">
                         <h3 className="text-lg font-semibold text-[#000]">Detalles del Participante</h3>
@@ -119,9 +119,19 @@ export default function UserVerifyForm() {
                     />
                 </div>
             )}
+
+            {/* Mostrar mensaje de éxito después de la validación */}
+            {statusMessage === "Validado con éxito" && (
+                <div className="flex flex-col items-center mt-8">
+                    <div className="max-w-[300px] p-6 bg-white rounded-lg shadow-lg">
+                        <p className="text-green-500 text-lg font-semibold">¡Participante validado con éxito!</p>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
+
 
 
 

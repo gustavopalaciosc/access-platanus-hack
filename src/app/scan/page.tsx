@@ -2,6 +2,7 @@
 import { Html5QrcodeScanner, Html5Qrcode } from "html5-qrcode";
 import { useState, useEffect, useRef } from "react";
 import { supabase } from '../../lib/supabaseClient';
+import Navbar from "../components/Navbar";
 
 interface Participant {
     id: number;
@@ -44,7 +45,7 @@ export default function ScanPage() {
                     );
 
                     if (matchedParticipant) {
-                        setMessage(`Welcome, ${matchedParticipant.name} ${matchedParticipant.last_name}!`);
+                        setMessage(`Participante ${matchedParticipant.name} ${matchedParticipant.last_name} verificado!`);
                         // Aca se tiene que hacer la logica
                         updateIsVerified(matchedParticipant.id);
                         
@@ -126,16 +127,18 @@ export default function ScanPage() {
 
 
     return (
-        <div className="flex flex-col justify-center items-center min-h-screen">
-            <div className="w-[400px] h-[500px] p-4 bg-[#6d6d6d] rounded-lg shadow-lg">
-                <h1 className="text-center text-xl font-semibold mb-4">Scan QR Code</h1>
+        <>
+        <Navbar />
+        <div className="flex flex-col justify-center items-center mt-6">
+            <div className="w-[300px] h-[400px] m-[10px] p-4 bg-[#a8a8a8] rounded-lg shadow-lg">
+                <h1 className="text-center text-xl font-semibold mb-4 text-[#4b4b4b]">QR Participante</h1>
 
                 {/* Mostrar el lector de QR solo si no hay un resultado */}
                 {!scanResult && (
                     <div
                         id="qr-reader"
                         ref={scannerRef}
-                        className="w-full h-[370px] bg-black rounded-md"
+                        className="w-full h-[270px] bg-black rounded-md"
                     ></div>
                 )}
 
@@ -145,13 +148,13 @@ export default function ScanPage() {
                 {/* Mostrar mensaje de éxito o error */}
                 {message && (
                     <div className="mt-4 p-4 text-center">
-                        <p className={`text-lg font-semibold ${message.includes('Invalid') ? 'text-red-600' : 'text-green-600'}`}>
+                        <p className={`text-lg font-semibold ${message.includes('Invalid') ? 'text-red-600' : 'text-[#FFFF]'}`}>
                             {message}
                         </p>
                     </div>
                 )}
             </div>
-            <a href="/home">Volver</a>
         </div>
+        </>
     );
 }

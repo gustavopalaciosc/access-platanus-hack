@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import { Participant } from '../interfaces/Participant';
+import Navbar from '../components/Navbar';
 
 
 export default function ParticipantsPage() {
@@ -30,6 +31,8 @@ export default function ParticipantsPage() {
     const noVerifiedParticipants = participants.filter((participant) => !participant.is_verified);
 
     return (
+        <>
+        <Navbar />
         <div className="min-h-screen p-6">
             <h1 className="text-3xl font-semibold text-center mb-6">Participantes No Validados</h1>
 
@@ -49,12 +52,11 @@ export default function ParticipantsPage() {
             >
             <p className="text-xl font-semibold">{participant.name} {participant.last_name}</p>
         </div>
-    ))}
-    </div>
-            )}
-            <div className='flex justify-center mt-[10px] text-2xl'>    
-                <a href="/home">volver</a>
-            </div>
+        ))}
         </div>
+            )}
+           
+        </div>
+        </>
     );
 }
