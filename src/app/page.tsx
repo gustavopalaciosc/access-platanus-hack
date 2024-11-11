@@ -17,7 +17,7 @@ function Home() {
 
   return (
     <div className="flex justify-center flex-col items-center mt-[300px]">
-      <h1 className="text-4xl xl:text-6xl mb-[25px]">Access platanus Hack</h1>
+      <h1 className="text-3xl xl:text-6xl mb-[25px]">Access platanus Hack</h1>
         <Button onClick={handleClick} label="Acceso validador"/>
     </div>
  

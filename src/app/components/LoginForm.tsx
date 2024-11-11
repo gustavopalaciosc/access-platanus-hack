@@ -16,10 +16,12 @@ export default function LoginForm() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [errorMessage, setErrorMessage] = useState<string>('');
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const router = useRouter();
 
     const handleLogin = async (event: React.FormEvent) => {
         event.preventDefault(); // Prevents default form submission
+        setIsLoading(true);
 
         try {
             const { data, error } = await supabase.auth.signInWithPassword({
@@ -43,6 +45,8 @@ export default function LoginForm() {
         } catch (error) {
             console.error("Error:", error);
             setErrorMessage("An unexpected error occurred. Please try again.");
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -68,7 +72,7 @@ export default function LoginForm() {
                         {errorMessage}
                     </div>
                     <div className="mt-6 flex justify-center">
-                        <Button label="Iniciar sesión" />
+                        <Button label={isLoading ? "Ingresando..." : "Iniciar sesión"} />
                     </div>
                 </form>
             </div>
