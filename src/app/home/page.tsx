@@ -26,7 +26,7 @@ export default function HomePage() {
                 QR Scanner
             </a>
             <a 
-                href="/scan" 
+                href="/manual-verify" 
                 className="m-[10px] text-lg font-semibold text-white bg-yellow-500 hover:bg-yellow-700 px-6 py-3 rounded-lg w-full text-center transition-colors duration-300 ease-in-out"
             >
                 Validación Manual
