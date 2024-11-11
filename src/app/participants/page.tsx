@@ -1,15 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabaseClient';
+import { Participant } from '../interfaces/Participant';
 
-interface Participant {
-    id: number;
-    name: string;
-    last_name: string;
-    entry_time: string;
-    is_verified: boolean;
-    validation_code: string;
-}
 
 export default function ParticipantsPage() {
     const [participants, setParticipants] = useState<Participant[]>([]);
