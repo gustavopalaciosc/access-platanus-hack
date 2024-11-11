@@ -35,7 +35,7 @@ export default function HomePage() {
                 href="/participants" 
                 className="m-[10px] text-lg font-semibold text-white bg-yellow-500 hover:bg-yellow-700 px-6 py-3 rounded-lg w-full text-center transition-colors duration-300 ease-in-out"
             >
-                Participantes Validados
+                Participantes no Validados
             </a>
 
             <div className='flex justify-center text-[25px] mt-[10px] hover:text-[#b9b9b9]'>
